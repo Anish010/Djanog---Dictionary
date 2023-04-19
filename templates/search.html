@@ -1,0 +1,52 @@
+{% extends 'index.html' %} {% load static %} {% block content %}
+<div>
+    {% if meaning.0 != "-1" %} 
+  <h2 align="center">{{ word | title }}</h2>
+    {% else %}
+     <div class="alert alert-warning" role="alert">Sorry, {{word}} Is Not Found In Our Database</div>
+    {% endif %}
+
+  <br />
+{% if meaning.0 != "-1" %}
+  <p><b>Meaning: </b></p>
+
+  <ul class="list-group">
+    {% for m in meaning %}
+    <li class="list-group-item"><b>{{ forloop.counter }}</b> : <i>{{m}}</i></li>
+    {% endfor %}
+  </ul>
+
+
+  <br />
+  <p>
+    <b>Synonyms: </b>
+  </p>
+
+  <div class="row">
+    {% if synonym_list.0 != "-1" %} 
+    {% for s in synonym_list %}
+    <div class="col-2"><a href="/search?word={{s}}">{{s}}</a></div>
+
+    {% endfor %}
+    {% else %}
+     <div class="alert alert-warning" role="alert">Synonyms Not Found In Our Database !</div>
+    {% endif %}
+  </div>
+
+  <br />
+  <p>
+    <b>Antonyms: </b>
+  </p>
+
+  <div class="row">
+    {% if antonym_list.0 != "-1" %} 
+    {% for a in antonym_list %}
+    <div class="col-2"><a href="/search?word={{a}}">{{a}}</a></div>
+
+    {% endfor %} 
+    {% else %}
+    <div class="alert alert-warning" role="alert">Antonyms Not Found In Our Database !</div>
+    {% endif %}
+  </div>    {% endif %}
+</div>
+{% endblock %}
