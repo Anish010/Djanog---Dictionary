@@ -1,10 +1,10 @@
 {% extends 'index.html' %} {% load static %} {% block content %}
 <div>
   {% if word %}
-    {% if meaning.0 != "-1" %} 
+    
   <h2 align="center" style="font-family: 'Phudu', cursive;">WORD : {{ word | title }}</h2>
 
-    {% else %}
+    {% if meaning.0 == "-1" %} 
      <div class="alert alert-warning" role="alert">Sorry ! {{word}} Is Not Found In Our Database</div>
     {% endif %}
   

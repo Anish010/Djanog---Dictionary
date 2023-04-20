@@ -50,20 +50,26 @@ def search(request):
                 soup2 = BeautifulSoup(source_synonym_antonym.text, 'html.parser')
 
                     # synonym_list = []
-                synonyms = soup2.find_all('a', {'class': 'css-1kg1yv8 eh475bn0'})
+                synonyms = soup2.find_all('a', {'class': 'css-1gyuw4i eh475bn0'})
+                extra_syn = soup2.find_all('a', {'class': 'css-1kg1yv8 eh475bn0'})
 
-                if synonyms:
+                if synonyms or extra_syn:
+                    for j in extra_syn:
+                        synonym_list.append(j.text)
                     for i in synonyms:
                         synonym_list.append(i.text)
+                    
                 else:
                     synonym_list.append("-1")
         
                     # antonym_list = []
                 antonyms = soup2.find_all('a', {'class': 'css-15bafsg eh475bn0'})
-
-                if antonyms:
+                extra_ant = soup2.find_all('a',{'class':'css-pc0050 eh475bn0'})
+                if antonyms or extra_ant:
                     for i in antonyms:
                         antonym_list.append(i.text)
+                    for j in extra_ant:
+                        antonym_list.append(j.text)    
                 else:
                     antonym_list.append("-1")
             else:
