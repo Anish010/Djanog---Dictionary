@@ -1,31 +1,36 @@
 {% extends 'index.html' %} {% load static %} {% block content %}
 <div>
+  {% if word %}
     {% if meaning.0 != "-1" %} 
-  <h2 align="center">{{ word | title }}</h2>
+  <h2 align="center" style="font-family: 'Phudu', cursive;">WORD : {{ word | title }}</h2>
+
     {% else %}
-     <div class="alert alert-warning" role="alert">Sorry, {{word}} Is Not Found In Our Database</div>
+     <div class="alert alert-warning" role="alert">Sorry ! {{word}} Is Not Found In Our Database</div>
     {% endif %}
+  
 
   <br />
 {% if meaning.0 != "-1" %}
-  <p><b>Meaning: </b></p>
+  <p><b>MEANING: </b></p>
 
   <ul class="list-group">
     {% for m in meaning %}
-    <li class="list-group-item"><b>{{ forloop.counter }}</b> : <i>{{m}}</i></li>
+    <li class="list-group-item" style="font-family: 'Chivo Mono', monospace;"><b>{{ forloop.counter }}</b> : <em>{{m}}</em></li>
     {% endfor %}
   </ul>
 
-
   <br />
   <p>
-    <b>Synonyms: </b>
+    <b>SYNONYMS: </b>
   </p>
 
   <div class="row">
     {% if synonym_list.0 != "-1" %} 
     {% for s in synonym_list %}
-    <div class="col-2"><a href="/search?word={{s}}">{{s}}</a></div>
+    <ul class="list-group list-group-horizontal-sm" >
+    <li class="list-group-item border-0 pr-0" style="font-family: 'Baloo Thambi 2', cursive; font-size:23px"><a href="/search?word={{s}}"><span class="badge badge-info">{{s}}</span></a></li>
+    </ul>
+
 
     {% endfor %}
     {% else %}
@@ -35,18 +40,23 @@
 
   <br />
   <p>
-    <b>Antonyms: </b>
+    <b>ANTONYMS: </b>
   </p>
 
   <div class="row">
     {% if antonym_list.0 != "-1" %} 
     {% for a in antonym_list %}
-    <div class="col-2"><a href="/search?word={{a}}">{{a}}</a></div>
-
+    <ul class="list-group list-group-horizontal-sm" >
+      <li class="list-group-item border-0 pr-0"  style="font-family: 'Baloo Thambi 2', cursive; font-size:23px"><a href="/search?word={{a}}"><span class="badge badge-danger fs-2 ">{{a}}</span></a></li>
+      </ul>
     {% endfor %} 
     {% else %}
     <div class="alert alert-warning" role="alert">Antonyms Not Found In Our Database !</div>
     {% endif %}
-  </div>    {% endif %}
+  </div>    
+  {% endif %}
+   {% else %}
+     <div class="alert alert-warning" role="alert">Please Enter the Word !</div>
+    {% endif %}
 </div>
 {% endblock %}
